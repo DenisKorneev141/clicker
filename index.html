@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Santa's Empire Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="user-profile">
+            <div class="rank-box">
+                <span id="rank-name">Загрузка...</span>
+                <div class="xp-bar"><div id="xp-fill"></div></div>
+            </div>
+            <div class="balance-box">
+                <span id="balance">0</span> <span class="coin">💰</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="screen-main" class="screen">
+        <div class="hp-section">
+            <div class="hp-info"><span>Здоровье</span><span id="hp-text">100/100</span></div>
+            <div class="hp-bar-bg"><div id="hp-fill"></div></div>
+        </div>
+        <div class="location-card">
+            <p>Текущая зона</p>
+            <h2 id="current-loc-name">Торговый зал</h2>
+        </div>
+        <div class="click-container">
+            <div class="glow"></div>
+            <img src="button.png" id="main-hero" alt="Hero">
+        </div>
+        <div class="quick-stats">
+            <div class="q-item">Цена одного клика: <b id="stat-click">1</b></div>
+            <div class="q-item">Пассивный доход: <b id="stat-auto">0</b>/с</div>
+        </div>
+    </main>
+
+    <section id="screen-battle" class="screen hidden">
+        <div class="enemy-header">
+            <div class="player-hp">
+    <div class="player-hp-text">
+        <span>ТВОЁ ЗДОРОВЬЕ</span>
+        <span id="battle-hp-text">100/100</span>
+    </div>
+    <div class="player-hp-bar-bg">
+        <div id="battle-hp-fill"></div>
+    </div>
+</div>
+            <div id="enemy-bubble">Готовься!</div>
+            <img src="" id="enemy-img">
+            <div class="enemy-hp-bar"><div id="enemy-hp-fill"></div></div>
+            <h3 id="enemy-name">Враг</h3>
+        </div>
+        <div id="battle-box">
+            <img src="button.png" id="player-heart">
+        </div>
+        <div class="battle-ui">
+            <div class="d-pad">
+                <button class="ctrl-btn" onpointerdown="startMove(0,-1)" onpointerup="stopMove()">▲</button>
+                <div class="mid-ctrl">
+                    <button class="ctrl-btn" onpointerdown="startMove(-1,0)" onpointerup="stopMove()">◀</button>
+                    <button class="ctrl-btn" onpointerdown="startMove(1,0)" onpointerup="stopMove()">▶</button>
+                </div>
+                <button class="ctrl-btn" onpointerdown="startMove(0,1)" onpointerup="stopMove()">▼</button>
+            </div>
+            <button id="attack-btn" onclick="playerAttack()">УДАР!</button>
+        </div>
+    </section>
+
+    <section id="screen-career" class="screen hidden">
+        <h2 class="title">Карьерная лестница</h2>
+        <div id="career-list" class="list-container"></div>
+    </section>
+
+    <section id="screen-locations" class="screen hidden">
+        <h2 class="title">Локации магазина</h2>
+        <div id="locations-list" class="list-container"></div>
+    </section>
+
+    <section id="screen-upgrades" class="screen hidden">
+        <h2 class="title">Бусты и снаряжение</h2>
+        <div id="boosts-list" class="list-container"></div>
+    </section>
+
+    <nav class="bottom-menu">
+        <button onclick="nav('main')" class="nav-item active">🏠 Игра</button>
+        <button onclick="nav('career')" class="nav-item">🏆 Должности</button>
+        <button onclick="nav('locations')" class="nav-item">🏬 Локации</button>
+        <button onclick="nav('upgrades')" class="nav-item">⚡ Магазин</button>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+:root {
+    --accent: #55abdc;
+    --bg-dark: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #ffffff;
+    --text-gray: #8b949e;
+}
+
+body { margin: 0; background: var(--bg-dark); color: var(--text); font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+
+header { padding: 15px 20px; background: rgba(22, 27, 34, 0.8); border-bottom: 1px solid var(--border); }
+.user-profile { display: flex; justify-content: space-between; align-items: center; }
+.rank-box { width: 50%; }
+#rank-name { color: var(--accent); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+.xp-bar { height: 4px; background: #21262d; border-radius: 2px; margin-top: 4px; }
+#xp-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.5s; }
+.balance-box { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+
+.screen { height: 78vh; padding: 20px; box-sizing: border-box; overflow-y: auto; position: relative; }
+.hidden { display: none !important; }
+
+/* HP */
+.hp-section { margin-bottom: 20px; }
+.hp-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px; color: var(--accent); }
+.hp-bar-bg { height: 10px; background: #21262d; border-radius: 5px; overflow: hidden; }
+#hp-fill { height: 100%; background: var(--accent); width: 100%; transition: 0.3s; box-shadow: 0 0 10px var(--accent); }
+
+/* BATTLE SYSTEM */
+#screen-battle { background: black; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+.enemy-header { text-align: center; width: 100%; position: relative; }
+#enemy-img { height: 100px; object-fit: contain; }
+#enemy-bubble { 
+    position: absolute; top: 0; right: 10px; background: white; color: black; 
+    padding: 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; max-width: 100px;
+}
+.enemy-hp-bar { width: 80%; height: 8px; background: #333; margin: 10px auto; border-radius: 4px; overflow: hidden; }
+#enemy-hp-fill { height: 100%; background: #ff4d4d; width: 100%; transition: 0.2s; }
+
+#battle-box { 
+    width: 260px; height: 180px; border: 4px solid white; 
+    position: relative; background: black; overflow: hidden; 
+}
+#player-heart { width: 25px; height: 25px; position: absolute; transition: 0.05s linear; }
+.bullet { position: absolute; width: 12px; height: 12px; background: white; border-radius: 50%; z-index: 10; }
+
+.battle-ui { display: flex; width: 100%; justify-content: space-around; align-items: center; padding-bottom: 20px; }
+.d-pad { display: flex; flex-direction: column; align-items: center; }
+.mid-ctrl { display: flex; gap: 10px; }
+.ctrl-btn { 
+    width: 50px; height: 50px; background: #222; border: 2px solid white; 
+    color: white; border-radius: 10px; font-size: 1.2rem; touch-action: none;
+}
+#attack-btn { 
+    background: #ff4d4d; color: white; border: 3px solid white; 
+    padding: 15px 25px; border-radius: 10px; font-weight: bold; 
+}
+
+/* CARDS */
+.list-container { display: flex; flex-direction: column; gap: 12px; padding-bottom: 60px; }
+.card { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
+.card.next-rank { border-color: var(--accent); background: rgba(85, 171, 220, 0.05); }
+.c-info h4 { margin: 0; color: var(--accent); }
+.c-info p { margin: 4px 0; font-size: 0.8rem; color: var(--text-gray); }
+
+.bottom-menu { position: fixed; bottom: 0; width: 100%; height: 70px; background: var(--card-bg); display: flex; border-top: 1px solid var(--border); }
+.nav-item { flex: 1; background: none; border: none; color: var(--text-gray); font-size: 0.7rem; }
+.nav-item.active { color: var(--accent); font-weight: bold; }
+.buy-btn { background: var(--accent); border: none; color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; }
+.hit {
+    animation: hitFlash 0.2s infinite alternate;
+}
+
+@keyframes hitFlash {
+    from { filter: brightness(1); }
+    to { filter: brightness(4); }
+}
+
+#battle-box {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px red; }
+    50% { box-shadow: 0 0 25px white; }
+    100% { box-shadow: 0 0 10px red; }
+}
+
+.card:hover {
+    box-shadow: 0 0 15px var(--accent);
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
+.player-hp {
+    width: 80%;
+    margin: 10px auto 0;
+}
+
+.player-hp-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: white;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.player-hp-bar-bg {
+    height: 10px;
+    background: #333;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 10px red;
+}
+
+#battle-hp-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #ff4d4d, #ff9900);
+    transition: 0.2s;
+}
+
+.location-card {
+    text-align: center;
+    background: radial-gradient(circle at top, rgba(85,171,220,0.15), transparent 60%), var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 18px 16px;
+    border-radius: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+
+.location-card p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+#current-loc-name {
+    margin: 6px 0 0;
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: .02em;
+    text-shadow: 0 0 12px rgba(85,171,220,.45);
+}
+
+.click-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 18px 0;
+}
+
+#main-hero {
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.08s ease, filter 0.08s ease;
+    will-change: transform, filter;
+}
+
+#main-hero:active {
+    transform: scale(0.92);
+    filter: brightness(1.25) drop-shadow(0 0 12px rgba(255,255,255,.6));
+}
+
+/* Вспышка */
+.click-container::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgba(255,255,255,.6);
+}
+
+.click-container.flash::after {
+    animation: clickFlash .25s ease-out;
+}
+
+@keyframes clickFlash {
+    from { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,.8); }
+    to   { opacity: 0; box-shadow: 0 0 0 35px rgba(255,255,255,0); }
+}
+
