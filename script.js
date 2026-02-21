@@ -5,10 +5,10 @@ const RANKS = [
     { name: "Стажёр", roomsNeeded: 0, bonus: "Начало пути", lootboxes: ['common'] },
     { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common'] },
     { name: "Кассир", roomsNeeded: 3, bonus: "Ходить в туалет по расписанию", lootboxes: ['common', 'rare', 'rare'] },
-    { name: "Приёмщица", roomsNeeded: 5, bonus: "Теперь у тебя будет твой личный ТСД", lootboxes: ['rare', 'rare', 'rare', 'epic'] },
-    { name: "Зав. ООРТ", roomsNeeded: 7, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic', 'epic'] },
-    { name: "Директор", roomsNeeded: 9, bonus: "Давайте завтра теперь будет звучать от тебя", lootboxes: ['epic', 'mythic', 'mythic','legendary'] },
-    { name: "Кустовая", roomsNeeded: 11, bonus: "Ну не мечта ли?", lootboxes: ['mythic', 'mythic', 'mythic','legendary','legendary'] },
+    { name: "Приёмщица", roomsNeeded: 5, bonus: "Теперь у тебя будет твой личный ТСД", lootboxes: ['rare', 'rare', 'rare'] },
+    { name: "Зав. ООРТ", roomsNeeded: 7, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic'] },
+    { name: "Директор", roomsNeeded: 9, bonus: "Давайте завтра теперь будет звучать от тебя", lootboxes: ['epic', 'mythic'] },
+    { name: "Кустовая", roomsNeeded: 11, bonus: "Ну не мечта ли?", lootboxes: ['mythic', 'mythic', 'mythic','legendary'] },
     { name: "Владелец Санта Ритейл", roomsNeeded: 13, bonus: "Власть над миром", lootboxes: ['mythic','mythic','mythic', 'mythic','legendary','legendary', 'legendary','legendary'] }
 ];
 
@@ -20,10 +20,10 @@ const LOCATIONS = [
     { id: 'oxr', name: 'Кабинет охраны', price: 300000, income: 60, lootboxes: ['rare'] },
     { id: 'xleb', name: 'Хлебная камера', price: 600000, income: 80, lootboxes: ['epic'] },
     { id: 'kab', name: 'Кабинетик', price: 1600000, income: 130, lootboxes: ['epic'] },
-    { id: 'pri', name: 'Приёмка', price: 5200000, income: 180, lootboxes: ['mythic'] },
+    { id: 'pri', name: 'Приёмка', price: 5200000, income: 180, lootboxes: ['epic'] },
     { id: 'ovo', name: 'Овощная камера', price: 15000000, income: 220, lootboxes: ['mythic'] },
-    { id: 'tual', name: 'Туалет', price: 20000000, income: 250, lootboxes: ['legendary'] },
-    { id: 'fas', name: 'Фасовка', price: 50000000, income: 500, lootboxes: ['legendary'] },
+    { id: 'tual', name: 'Туалет', price: 20000000, income: 250, lootboxes: ['mythic'] },
+    { id: 'fas', name: 'Фасовка', price: 50000000, income: 500, lootboxes: ['epic', 'epic'] },
     { id: 'stol', name: 'Столовая', price: 100000000, income: 800, lootboxes: ['legendary'] },
     { id: 'kabinet', name: 'Кабинет Светланы', price: 500000000, income: 1000, lootboxes: ['legendary', 'mythic'] }
 ];
@@ -55,26 +55,26 @@ const ITEM_TYPES = {
 // Временные усиления
 const TEMP_BOOSTS = {
     // Усиление клика
-    click_x2: { name: 'x2 Клик', icon: '⚡⚡', duration: 60, multiplier: 2, type: 'click', rarity: 'common' },
+    click_x2: { name: 'x2 Клик', icon: '⚡⚡', duration: 60, multiplier: 2, type: 'click', rarity: 'rare' },
     click_x3: { name: 'x3 Клик', icon: '⚡⚡⚡', duration: 30, multiplier: 3, type: 'click', rarity: 'rare' },
-    click_x5: { name: 'x5 Клик', icon: '💫⚡', duration: 15, multiplier: 5, type: 'click', rarity: 'epic' },
+    click_x5: { name: 'x5 Клик', icon: '💫⚡', duration: 15, multiplier: 5, type: 'click', rarity: 'rare' },
     click_x10: { name: 'x10 Клик', icon: '✨⚡', duration: 10, multiplier: 10, type: 'click', rarity: 'mythic' },
     click_x20: { name: 'x20 Клик', icon: '🌟⚡', duration: 10, multiplier: 20, type: 'click', rarity: 'legendary' },
     
     // Усиление пассива
-    passive_x2: { name: 'x2 Пассив', icon: '🏭🏭', duration: 60, multiplier: 2, type: 'passive', rarity: 'common' },
+    passive_x2: { name: 'x2 Пассив', icon: '🏭🏭', duration: 60, multiplier: 2, type: 'passive', rarity: 'rare' },
     passive_x3: { name: 'x3 Пассив', icon: '🏭🏭🏭', duration: 30, multiplier: 3, type: 'passive', rarity: 'rare' },
-    passive_x5: { name: 'x5 Пассив', icon: '💫🏭', duration: 20, multiplier: 5, type: 'passive', rarity: 'epic' },
+    passive_x5: { name: 'x5 Пассив', icon: '💫🏭', duration: 20, multiplier: 5, type: 'passive', rarity: 'mythic' },
     passive_x10: { name: 'x10 Пассив', icon: '✨🏭', duration: 15, multiplier: 10, type: 'passive', rarity: 'mythic' },
     passive_x20: { name: 'x15 Пассив', icon: '🌟🏭', duration: 10, multiplier: 20, type: 'passive', rarity: 'legendary' },
     
     // Усиление звезд
     star_x2: { name: 'x2 Звезды', icon: '⭐⭐', duration: 45, multiplier: 2, type: 'star', rarity: 'rare' },
-    star_x3: { name: 'x3 Звезды', icon: '⭐⭐⭐', duration: 30, multiplier: 3, type: 'star', rarity: 'epic' },
+    star_x3: { name: 'x3 Звезды', icon: '⭐⭐⭐', duration: 30, multiplier: 3, type: 'star', rarity: 'mythic' },
     star_x5: { name: 'x5 Звезды', icon: '💫⭐', duration: 20, multiplier: 5, type: 'star', rarity: 'mythic' },
     
     // Комбо усиления
-    all_x2: { name: 'x2 Всё', icon: '🌟✨', duration: 30, multiplier: 2, type: 'all', rarity: 'epic' },
+    all_x2: { name: 'x2 Всё', icon: '🌟✨', duration: 30, multiplier: 2, type: 'all', rarity: 'mythic' },
     all_x3: { name: 'x3 Всё', icon: '🌟🌟', duration: 20, multiplier: 3, type: 'all', rarity: 'mythic' },
     all_x5: { name: 'x5 Всё', icon: '🌟🌟🌟', duration: 10, multiplier: 5, type: 'all', rarity: 'legendary' }
 };
@@ -86,13 +86,13 @@ const LOOT_ITEMS = {
     money_huge: { type: ITEM_TYPES.MONEY, name: 'Сейф', value: 15000, icon: '🔒', rarity: 'mythic' },
     money_mega: { type: ITEM_TYPES.MONEY, name: 'Инкассаторская машина', value: 55000, icon: '🚚', rarity: 'legendary' },
     
-    click_small: { type: ITEM_TYPES.CLICK, name: 'Полиэтиленовые перчатки', value: 2, icon: '🧤', rarity: 'common' },
+    click_small: { type: ITEM_TYPES.CLICK, name: 'Полиэтиленовые перчатки', value: 2, icon: '🧤', rarity: 'rare' },
     click_medium: { type: ITEM_TYPES.CLICK, name: 'Многоразовые перчатки', value: 5, icon: '🥊', rarity: 'rare' },
     click_big: { type: ITEM_TYPES.CLICK, name: 'Усиленная перчатка', value: 15, icon: '⚡', rarity: 'epic' },
     click_huge: { type: ITEM_TYPES.CLICK, name: 'Протез', value: 40, icon: '🦾', rarity: 'mythic' },
     click_mega: { type: ITEM_TYPES.CLICK, name: 'Кибер-имплант', value: 100, icon: '🤖', rarity: 'legendary' },
     
-    passive_small: { type: ITEM_TYPES.PASSIVE, name: 'Складской стеллаж', value: 1, icon: '📦', rarity: 'common' },
+    passive_small: { type: ITEM_TYPES.PASSIVE, name: 'Складской стеллаж', value: 1, icon: '📦', rarity: 'rare' },
     passive_medium: { type: ITEM_TYPES.PASSIVE, name: 'Овощная камера', value: 3, icon: '❄️', rarity: 'rare' },
     passive_big: { type: ITEM_TYPES.PASSIVE, name: 'Автоматизация склада', value: 8, icon: '⚙️', rarity: 'epic' },
     passive_huge: { type: ITEM_TYPES.PASSIVE, name: 'Логистический центр', value: 20, icon: '🏭', rarity: 'mythic' },
@@ -138,17 +138,17 @@ const LOOTBOXES = {
         price: 10,
         drops: 3,
         chances: {
-            money: 40,
+            money: 48,
             click: 20,
             passive: 15,
             star: 15,
-            employee: 5,
-            temp_boost: 5 // 10% на временное усиление
+            employee: 1,
+            temp_boost: 1 // 10% на временное усиление
         },
         rarityChances: {
             common: 85,
-            rare: 12,
-            epic: 3,
+            rare: 15,
+            epic: 0,
             mythic: 0,
             legendary: 0
         }
@@ -158,14 +158,14 @@ const LOOTBOXES = {
         name: 'Редкий',
         color: '🟣',
         price: 30,
-        drops: 4,
+        drops: 3,
         chances: {
-            money: 35,
-            click: 15,
-            passive: 10,
-            star: 10,
-            employee: 10,
-            temp_boost: 20
+            money: 44,
+            click: 20,
+            passive: 15,
+            star: 15,
+            employee: 1,
+            temp_boost: 10
         },
         rarityChances: {
             common: 50,
@@ -180,21 +180,21 @@ const LOOTBOXES = {
         name: 'Эпический',
         color: '🔴',
         price: 70,
-        drops: 5,
+        drops: 4,
         chances: {
-            money: 25,
-            click: 15,
+            money: 30,
+            click: 20,
             passive: 15,
             star: 20,
-            employee: 10,
-            temp_boost: 15
+            employee: 5,
+            temp_boost: 10
         },
         rarityChances: {
             common: 15,
-            rare: 30,
+            rare: 35,
             epic: 30,
             mythic: 15,
-            legendary: 10
+            legendary: 5
         }
     },
     
@@ -213,10 +213,10 @@ const LOOTBOXES = {
         },
         rarityChances: {
             common: 0,
-            rare: 15,
-            epic: 30,
+            rare: 20,
+            epic: 35,
             mythic: 30,
-            legendary: 25
+            legendary: 15
         }
     },
     
@@ -235,10 +235,10 @@ const LOOTBOXES = {
         },
         rarityChances: {
             common: 0,
-            rare: 0,
-            epic: 20,
-            mythic: 30,
-            legendary: 50
+            rare: 5,
+            epic: 30,
+            mythic: 35,
+            legendary: 30
         }
     }
 };
@@ -1500,3 +1500,4 @@ window.forceCloseHideGame = function() {
     isSvetlanaSearching = false;
     showNotification('👻 Игра прервана');
 };
+
