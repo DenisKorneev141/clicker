@@ -2,97 +2,215 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Santa's Empire Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Clicker</title>
     <link rel="stylesheet" href="style.css">
+    <!-- В <head> добавить preload для картинок -->
+<link rel="preload" as="image" href="box_common.png">
+<link rel="preload" as="image" href="box_common.png">
+<link rel="preload" as="image" href="box_common.png">
+<link rel="preload" as="image" href="box_common.png">
+<link rel="preload" as="image" href="box_common.png">
 </head>
 <body>
 
-    <header>
-        <div class="user-profile">
-            <div class="rank-box">
-                <span id="rank-name">Загрузка...</span>
-                <div class="xp-bar"><div id="xp-fill"></div></div>
-            </div>
-            <div class="balance-box">
-                <span id="balance">0</span> <span class="coin">💰</span>
-            </div>
+<header>
+    <div class="user-profile">
+        <div class="rank-box">
+            <span id="rank-name">Стажёр</span>
+            <div class="xp-bar"><div id="xp-fill"></div></div>
         </div>
-    </header>
-
-    <main id="screen-main" class="screen">
-        <div class="hp-section">
-            <div class="hp-info"><span>Здоровье</span><span id="hp-text">100/100</span></div>
-            <div class="hp-bar-bg"><div id="hp-fill"></div></div>
+        <div class="balance-box">
+            💰 <span id="balance">0</span> |
+            ⭐ <span id="stars">0</span>
         </div>
-        <div class="location-card">
-            <p>Текущая зона</p>
-            <h2 id="current-loc-name">Торговый зал</h2>
-        </div>
-        <div class="click-container">
-            <div class="glow"></div>
-            <img src="button.png" id="main-hero" alt="Hero">
-        </div>
-        <div class="quick-stats">
-            <div class="q-item">Цена одного клика: <b id="stat-click">1</b></div>
-            <div class="q-item">Пассивный доход: <b id="stat-auto">0</b>/с</div>
-        </div>
-    </main>
-
-    <section id="screen-battle" class="screen hidden">
-        <div class="enemy-header">
-            <div class="player-hp">
-    <div class="player-hp-text">
-        <span>ТВОЁ ЗДОРОВЬЕ</span>
-        <span id="battle-hp-text">100/100</span>
     </div>
-    <div class="player-hp-bar-bg">
-        <div id="battle-hp-fill"></div>
+</header>
+
+<!-- Блок наборов на главном экране -->
+<div id="lootbox-bar" class="lootbox-bar hidden">
+    <span class="lootbox-label">📦 Наборы:</span>
+    <div class="lootbox-icons">
+        <div id="lootbox-common" class="lootbox-icon common" onclick="openLootbox('common')" title="Обычный набор">🔵 0</div>
+        <div id="lootbox-rare" class="lootbox-icon rare" onclick="openLootbox('rare')" title="Редкий набор">🟣 0</div>
+        <div id="lootbox-epic" class="lootbox-icon epic" onclick="openLootbox('epic')" title="Эпичный набор">🔴 0</div>
+        <div id="lootbox-legendary" class="lootbox-icon legendary" onclick="openLootbox('legendary')" title="Легендарный набор">🟡 0</div>
+        <div id="lootbox-mythic" class="lootbox-icon mythic" onclick="openLootbox('mythic')" title="Мифический набор">🟢 0</div>
     </div>
 </div>
-            <div id="enemy-bubble">Готовься!</div>
-            <img src="" id="enemy-img">
-            <div class="enemy-hp-bar"><div id="enemy-hp-fill"></div></div>
-            <h3 id="enemy-name">Враг</h3>
+
+<main id="screen-main" class="screen">
+    <div class="location-card">
+        <p>Текущая зона</p>
+        <h2 id="current-loc-name">Торговый зал</h2>
+    </div>
+
+    <div class="click-container">
+        <img src="button.png" id="main-hero" alt="Click">
+    </div>
+
+    <div class="quick-stats">
+        <div>Клик: <b id="stat-click">1</b></div>
+        <div>Пассив: <b id="stat-auto">0</b>/с</div>
+        <div>Комнат: <b id="stat-rooms">1</b></div>
+    </div>
+    <div id="temp-boosts-container" class="temp-boosts-container hidden">
+    <!-- Сюда будут добавляться усиления через JS -->
+</div>
+</main>
+
+<section id="screen-progress" class="screen hidden">
+    <h2>📈 Прогресс</h2>
+    
+    <h3>🎖 Карьера</h3>
+    <div id="career-list" class="grid"></div>
+
+    <h3>🏬 Локации</h3>
+    <div id="locations-list" class="grid"></div>
+</section>
+
+<section id="screen-upgrades" class="screen hidden">
+    <h2>🛒 Магазин</h2>
+
+    <h3>⚡ Клик</h3>
+    <div id="boosts-click" class="grid"></div>
+
+    <h3>🏭 Пассив</h3>
+    <div id="boosts-auto" class="grid"></div>
+
+    <h3>📦 Наборы карточек</h3>
+    <div id="lootbox-shop" class="grid"></div>
+
+    <h3>🧹 Сервис</h3>
+    <div id="boosts-service" class="grid"></div>
+</section>
+
+<!-- Новая вкладка Коллекция -->
+<section id="screen-collection" class="screen hidden">
+    <h2>👥 Коллекция сотрудников</h2>
+    
+    <div class="collection-stats">
+        <div class="progress-bar-container">
+            <div class="progress-label">Собрано: <span id="collection-count">0</span>/<span id="collection-total">20</span></div>
+            <div class="progress-bar-bg"><div id="collection-progress" class="progress-bar-fill" style="width: 0%"></div></div>
         </div>
-        <div id="battle-box">
-            <img src="button.png" id="player-heart">
+        <div class="total-bonus">
+            Общий бонус: +<span id="total-bonus">0</span>
         </div>
-        <div class="battle-ui">
-            <div class="d-pad">
-                <button class="ctrl-btn" onpointerdown="startMove(0,-1)" onpointerup="stopMove()">▲</button>
-                <div class="mid-ctrl">
-                    <button class="ctrl-btn" onpointerdown="startMove(-1,0)" onpointerup="stopMove()">◀</button>
-                    <button class="ctrl-btn" onpointerdown="startMove(1,0)" onpointerup="stopMove()">▶</button>
-                </div>
-                <button class="ctrl-btn" onpointerdown="startMove(0,1)" onpointerup="stopMove()">▼</button>
+    </div>
+
+    <div class="collection-filters">
+        <button class="filter-btn active" onclick="filterCollection('all')">Все</button>
+        <button class="filter-btn" onclick="filterCollection('common')">🔵 Обычные</button>
+        <button class="filter-btn" onclick="filterCollection('rare')">🟣 Редкие</button>
+        <button class="filter-btn" onclick="filterCollection('epic')">🔴 Эпичные</button>
+        <button class="filter-btn" onclick="filterCollection('legendary')">🟡 Легендарные</button>
+        <button class="filter-btn" onclick="filterCollection('mythic')">🟢 Мифические</button>
+    </div>
+
+    <div id="collection-list" class="collection-grid"></div>
+</section>
+
+<nav class="bottom-menu">
+    <button class="nav-item active" onclick="nav('main', event)">🏠 Игра</button>
+    <button class="nav-item" onclick="nav('progress', event)">📈 Прогресс</button>
+    <button class="nav-item" onclick="nav('upgrades', event)">🛒 Магазин</button>
+    <button class="nav-item" onclick="nav('collection', event)">👥 Коллекция</button>
+</nav>
+
+<script src="script.js"></script>
+
+<!-- Экран открытия набора -->
+<!-- Экран открытия набора (мобильная версия) -->
+<div id="lootbox-open-screen" class="lootbox-open-screen hidden">
+    <div class="lootbox-open-container">
+        <!-- Верхняя часть с ящиком -->
+        <div class="lootbox-top">
+            <div class="lootbox-image-wrapper">
+                <img id="lootbox-image" src="" alt="Lootbox" class="lootbox-image">
+                <div class="click-hint">👆 Нажми на ящик</div>
             </div>
-            <button id="attack-btn" onclick="playerAttack()">УДАР!</button>
         </div>
-    </section>
+        
+        <!-- Нижняя часть с предметами -->
+        <div class="lootbox-bottom">
+            <div class="lootbox-header">
+                <h2 id="lootbox-title">Обычный набор</h2>
+                <div class="lootbox-counter">
+                    <span id="lootbox-remaining">3</span>/<span id="lootbox-total">3</span>
+                </div>
+            </div>
+            
+            <div id="lootbox-items" class="lootbox-items">
+                <!-- Сюда будут добавляться выпавшие предметы -->
+            </div>
+            
+            <button id="lootbox-close" class="lootbox-close hidden" onclick="closeLootboxOpen()">
+                ✕ Закрыть
+            </button>
+        </div>
+    </div>
+</div>
 
-    <section id="screen-career" class="screen hidden">
-        <h2 class="title">Карьерная лестница</h2>
-        <div id="career-list" class="list-container"></div>
-    </section>
+<!-- Аудио элементы -->
+<audio id="sound-click" preload="auto">
+    <source src="click.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-coin" preload="auto">
+    <source src="coin.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-star" preload="auto">
+    <source src="star.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-lootbox-open" preload="auto">
+    <source src="lootbox-open.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-lootbox-item" preload="auto">
+    <source src="lootbox-item.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-boost" preload="auto">
+    <source src="boost.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-employee" preload="auto">
+    <source src="employee.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-level-up" preload="auto">
+    <source src="level-up.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-purchase" preload="auto">
+    <source src="purchase.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-notification" preload="auto">
+    <source src="notification.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-footstep" preload="auto">
+    <source src="footstep.mp3" type="audio/mpeg">
+</audio>
 
-    <section id="screen-locations" class="screen hidden">
-        <h2 class="title">Локации магазина</h2>
-        <div id="locations-list" class="list-container"></div>
-    </section>
+<!-- Кнопка включения/выключения звука -->
+<div id="sound-toggle" class="sound-toggle" onclick="toggleSound()">
+    <span id="sound-icon">🔊</span>
+</div>
 
-    <section id="screen-upgrades" class="screen hidden">
-        <h2 class="title">Бусты и снаряжение</h2>
-        <div id="boosts-list" class="list-container"></div>
-    </section>
-
-    <nav class="bottom-menu">
-        <button onclick="nav('main')" class="nav-item active">🏠 Игра</button>
-        <button onclick="nav('career')" class="nav-item">🏆 Должности</button>
-        <button onclick="nav('locations')" class="nav-item">🏬 Локации</button>
-        <button onclick="nav('upgrades')" class="nav-item">⚡ Магазин</button>
-    </nav>
-
-    <script src="script.js"></script>
+<!-- Экран игры в прятки со Светланой -->
+<!-- Экран игры в прятки со Светланой -->
+<!-- Экран игры в прятки со Светланой -->
+<!-- Экран игры в прятки со Светланой -->
+<div id="hide-screen" class="lootbox-open-screen hidden">
+    <div class="lootbox-open-container" style="flex-direction: column; padding: 20px;">
+        <h2 style="color: var(--accent); text-align: center; margin-bottom: 20px;">👻 ПРЯТКИ СО СВЕТЛАНОЙ</h2>
+        
+        <div class="hide-map-container" style="flex: 1; overflow-y: auto;">
+            <div class="map-grid" id="hide-map-grid">
+                <!-- Комнаты будут созданы через JavaScript -->
+            </div>
+        </div>
+        
+        <div style="padding: 20px; text-align: center;">
+            <div id="hide-status" style="color: var(--text-gray); margin-bottom: 15px;">Выбери комнату на карте!</div>
+            <button id="hide-start" class="buy-btn" style="padding: 12px 30px; font-size: 1.2rem;" onclick="startHideGame()" disabled>🏃 Спрятаться</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
