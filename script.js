@@ -6,9 +6,9 @@ const RANKS = [
     { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common'] },
     { name: "Кассир", roomsNeeded: 3, bonus: "Ходить в туалет по расписанию", lootboxes: ['common', 'rare', 'rare'] },
     { name: "Приёмщица", roomsNeeded: 5, bonus: "Теперь у тебя будет твой личный ТСД", lootboxes: ['rare', 'rare', 'rare'] },
-    { name: "Зав. ООРТ", roomsNeeded: 7, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic'] },
-    { name: "Директор", roomsNeeded: 9, bonus: "Давайте завтра теперь будет звучать от тебя", lootboxes: ['epic', 'mythic'] },
-    { name: "Кустовая", roomsNeeded: 11, bonus: "Ну не мечта ли?", lootboxes: ['mythic', 'mythic', 'mythic','legendary'] },
+    { name: "Зав. ООРТ", roomsNeeded: 6, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic', 'legendary'] },
+    { name: "Директор", roomsNeeded: 7, bonus: "Давайте завтра теперь будет звучать от тебя", lootboxes: ['epic', 'mythic'] },
+    { name: "Кустовая", roomsNeeded: 10, bonus: "Ну не мечта ли?", lootboxes: ['mythic', 'mythic', 'mythic','legendary'] },
     { name: "Владелец Санта Ритейл", roomsNeeded: 13, bonus: "Власть над миром", lootboxes: ['mythic','mythic','mythic', 'mythic','legendary','legendary', 'legendary','legendary'] }
 ];
 
@@ -18,7 +18,7 @@ const LOCATIONS = [
     { id: 'kond', name: 'Кондитерка', price: 70000, income: 25, lootboxes: ['common'] },
     { id: 'pek', name: 'Пекарня', price: 150000, income: 50, lootboxes: ['rare'] },
     { id: 'oxr', name: 'Кабинет охраны', price: 300000, income: 60, lootboxes: ['rare'] },
-    { id: 'xleb', name: 'Хлебная камера', price: 600000, income: 80, lootboxes: ['epic'] },
+    { id: 'xleb', name: 'Хлебная камера', price: 600000, income: 80, lootboxes: ['epic', 'mythic'] },
     { id: 'kab', name: 'Кабинетик', price: 1600000, income: 130, lootboxes: ['epic'] },
     { id: 'pri', name: 'Приёмка', price: 5200000, income: 180, lootboxes: ['epic'] },
     { id: 'ovo', name: 'Овощная камера', price: 15000000, income: 220, lootboxes: ['mythic'] },
@@ -55,21 +55,21 @@ const ITEM_TYPES = {
 // Временные усиления
 const TEMP_BOOSTS = {
     // Усиление клика
-    click_x2: { name: 'x2 Клик', icon: '⚡⚡', duration: 60, multiplier: 2, type: 'click', rarity: 'rare' },
+    click_x2: { name: 'x2 Клик', icon: '⚡⚡', duration: 60, multiplier: 2, type: 'click', rarity: 'common' },
     click_x3: { name: 'x3 Клик', icon: '⚡⚡⚡', duration: 30, multiplier: 3, type: 'click', rarity: 'rare' },
     click_x5: { name: 'x5 Клик', icon: '💫⚡', duration: 15, multiplier: 5, type: 'click', rarity: 'rare' },
     click_x10: { name: 'x10 Клик', icon: '✨⚡', duration: 10, multiplier: 10, type: 'click', rarity: 'mythic' },
     click_x20: { name: 'x20 Клик', icon: '🌟⚡', duration: 10, multiplier: 20, type: 'click', rarity: 'legendary' },
     
     // Усиление пассива
-    passive_x2: { name: 'x2 Пассив', icon: '🏭🏭', duration: 60, multiplier: 2, type: 'passive', rarity: 'rare' },
+    passive_x2: { name: 'x2 Пассив', icon: '🏭🏭', duration: 60, multiplier: 2, type: 'passive', rarity: 'common' },
     passive_x3: { name: 'x3 Пассив', icon: '🏭🏭🏭', duration: 30, multiplier: 3, type: 'passive', rarity: 'rare' },
     passive_x5: { name: 'x5 Пассив', icon: '💫🏭', duration: 20, multiplier: 5, type: 'passive', rarity: 'mythic' },
     passive_x10: { name: 'x10 Пассив', icon: '✨🏭', duration: 15, multiplier: 10, type: 'passive', rarity: 'mythic' },
     passive_x20: { name: 'x15 Пассив', icon: '🌟🏭', duration: 10, multiplier: 20, type: 'passive', rarity: 'legendary' },
     
     // Усиление звезд
-    star_x2: { name: 'x2 Звезды', icon: '⭐⭐', duration: 45, multiplier: 2, type: 'star', rarity: 'rare' },
+    star_x2: { name: 'x2 Звезды', icon: '⭐⭐', duration: 45, multiplier: 2, type: 'star', rarity: 'common' },
     star_x3: { name: 'x3 Звезды', icon: '⭐⭐⭐', duration: 30, multiplier: 3, type: 'star', rarity: 'mythic' },
     star_x5: { name: 'x5 Звезды', icon: '💫⭐', duration: 20, multiplier: 5, type: 'star', rarity: 'mythic' },
     
@@ -138,16 +138,16 @@ const LOOTBOXES = {
         price: 10,
         drops: 3,
         chances: {
-            money: 48,
-            click: 20,
+            money: 40,
+            click: 24,
             passive: 15,
-            star: 15,
+            star: 19,
             employee: 1,
             temp_boost: 1 // 10% на временное усиление
         },
         rarityChances: {
-            common: 85,
-            rare: 15,
+            common: 75,
+            rare: 25,
             epic: 0,
             mythic: 0,
             legendary: 0
@@ -157,7 +157,7 @@ const LOOTBOXES = {
     rare: {
         name: 'Редкий',
         color: '🟣',
-        price: 30,
+        price: 20,
         drops: 3,
         chances: {
             money: 44,
@@ -168,8 +168,8 @@ const LOOTBOXES = {
             temp_boost: 10
         },
         rarityChances: {
-            common: 50,
-            rare: 35,
+            common: 45,
+            rare: 40,
             epic: 10,
             mythic: 4,
             legendary: 1
@@ -179,7 +179,7 @@ const LOOTBOXES = {
     epic: {
         name: 'Эпический',
         color: '🔴',
-        price: 70,
+        price: 50,
         drops: 4,
         chances: {
             money: 30,
@@ -190,9 +190,9 @@ const LOOTBOXES = {
             temp_boost: 10
         },
         rarityChances: {
-            common: 15,
-            rare: 35,
-            epic: 30,
+            common: 5,
+            rare: 40,
+            epic: 35,
             mythic: 15,
             legendary: 5
         }
@@ -201,8 +201,8 @@ const LOOTBOXES = {
     mythic: {
         name: 'Мифический',
         color: '🟢',
-        price: 120,
-        drops: 6,
+        price: 100,
+        drops: 7,
         chances: {
             money: 15,
             click: 20,
@@ -223,7 +223,7 @@ const LOOTBOXES = {
     legendary: {
         name: 'Легендарный',
         color: '🟡',
-        price: 200,
+        price: 150,
         drops: 12,
         chances: {
             money: 10,
@@ -1500,4 +1500,5 @@ window.forceCloseHideGame = function() {
     isSvetlanaSearching = false;
     showNotification('👻 Игра прервана');
 };
+
 
