@@ -3,7 +3,7 @@
 // ==========================================
 const RANKS = [
     { name: "Стажёр", roomsNeeded: 0, bonus: "Начало пути", lootboxes: ['common'] },
-    { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common','legendary,'legendary,'legendary] },
+    { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common','legendary','legendary','legendary'] },
     { name: "Кассир", roomsNeeded: 3, bonus: "Ходить в туалет по расписанию", lootboxes: ['common', 'rare', 'rare'] },
     { name: "Приёмщица", roomsNeeded: 5, bonus: "Теперь у тебя будет твой личный ТСД", lootboxes: ['rare', 'rare', 'rare'] },
     { name: "Зав. ООРТ", roomsNeeded: 6, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic', 'legendary'] },
@@ -14,7 +14,7 @@ const RANKS = [
 
 const LOCATIONS = [
     { id: 'hall', name: 'Торговый зал', price: 0, income: 1, lootboxes: [] },
-    { id: 'sklad', name: 'Склад напитков', price: 1000, income: 15, lootboxes: ['common','legendary,'legendary] },
+    { id: 'sklad', name: 'Склад напитков', price: 1000, income: 15, lootboxes: ['common','legendary','legendary'] },
     { id: 'kond', name: 'Кондитерка', price: 70000, income: 25, lootboxes: ['common'] },
     { id: 'pek', name: 'Пекарня', price: 150000, income: 50, lootboxes: ['rare'] },
     { id: 'oxr', name: 'Кабинет охраны', price: 300000, income: 60, lootboxes: ['rare'] },
@@ -1500,6 +1500,7 @@ window.forceCloseHideGame = function() {
     isSvetlanaSearching = false;
     showNotification('👻 Игра прервана');
 };
+
 
 
 
