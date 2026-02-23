@@ -3,7 +3,7 @@
 // ==========================================
 const RANKS = [
     { name: "Стажёр", roomsNeeded: 0, bonus: "Начало пути", lootboxes: ['common'] },
-    { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common'] },
+    { name: "Продавец", roomsNeeded: 2, bonus: "База баз", lootboxes: ['common', 'common', 'common','legendary,'legendary,'legendary] },
     { name: "Кассир", roomsNeeded: 3, bonus: "Ходить в туалет по расписанию", lootboxes: ['common', 'rare', 'rare'] },
     { name: "Приёмщица", roomsNeeded: 5, bonus: "Теперь у тебя будет твой личный ТСД", lootboxes: ['rare', 'rare', 'rare'] },
     { name: "Зав. ООРТ", roomsNeeded: 6, bonus: "Власть над овощным и не только", lootboxes: ['rare', 'rare', 'epic', 'legendary'] },
@@ -14,7 +14,7 @@ const RANKS = [
 
 const LOCATIONS = [
     { id: 'hall', name: 'Торговый зал', price: 0, income: 1, lootboxes: [] },
-    { id: 'sklad', name: 'Склад напитков', price: 15000, income: 15, lootboxes: ['common'] },
+    { id: 'sklad', name: 'Склад напитков', price: 1000, income: 15, lootboxes: ['common','legendary,'legendary] },
     { id: 'kond', name: 'Кондитерка', price: 70000, income: 25, lootboxes: ['common'] },
     { id: 'pek', name: 'Пекарня', price: 150000, income: 50, lootboxes: ['rare'] },
     { id: 'oxr', name: 'Кабинет охраны', price: 300000, income: 60, lootboxes: ['rare'] },
@@ -226,19 +226,19 @@ const LOOTBOXES = {
         price: 150,
         drops: 12,
         chances: {
-            money: 10,
+            money: 15,
             click: 10,
             passive: 10,
             star: 20,
             employee: 25,
-            temp_boost: 25
+            temp_boost: 20
         },
         rarityChances: {
             common: 0,
             rare: 5,
-            epic: 30,
-            mythic: 35,
-            legendary: 30
+            epic: 20,
+            mythic: 40,
+            legendary: 35
         }
     }
 };
@@ -1500,5 +1500,6 @@ window.forceCloseHideGame = function() {
     isSvetlanaSearching = false;
     showNotification('👻 Игра прервана');
 };
+
 
 
